@@ -1,0 +1,53 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  font-size: 1.2em;
+}
+
+#header-img {
+  margin-top: 2.5em;
+  margin-bottom: 2em;
+}
+
+#main-menu {
+  background-color: white;
+  font-size: .75em;
+}
+
+
+.red-outline {
+  border: 1px red dashed;
+}
+
+#sidebar {
+  font-size: 1rem;
+}
+
+.post-header {
+  margin-bottom: 0;
+}
+
+.ui.header.post-header {
+  margin-bottom: 0;
+}
+
+.post-meta {
+  font-size: .75em;
+  color: rgba(0,0,0,.4);
+  height: 1em;
+}
+
+#delete-post {
+  display: inline;
+}
+
+.post-meta-margin {
+  margin-right: 1.5em;
+}
+
+.ui.card .meta, .ui.cards > .card .meta {
+  font-size: 0.75em;
+}
+

@@ -1,0 +1,30 @@
+<% include ../partials/header%>
+
+<div class="ui container">
+    <div class="ui two column center stackable relaxed grid">
+        <div class="sixteen wide mobile thirteen wide tablet eleven wide computer column">
+            <h1>Create a new blog post</h1>
+            <form class="ui form" action="/content" method="POST">
+                <div class="field">
+                    <input name="blog[title]" placeholder="title" type="text"></input>
+                </div>
+                <div class="field">
+                    <input name="blog[author]" placeholder="author" type="text"></input>
+                </div>
+                <div class="field">
+                    <input name="blog[image]" type="text" placeholder="Link to image"></input>
+                </div>
+                <div class="field">
+                    <textarea name="blog[content]" placeholder="Blog content here."></textarea>
+                </div>
+                <button class="ui submit button" type="submit">Submit</button>
+            </form>
+        </div>
+        
+        <% include ../partials/sidebar%>
+        
+    </div>
+</div>
+
+
+<% include ../partials/footer%>
