@@ -22,6 +22,8 @@ app.locals.moment = require('moment');
 app.use(methodOverride("_method"));;
 app.use(expressSanitizer());
 
+
+
 // Connect Mongoose
 mongoose.connect('mongodb://localhost/nodeblog');
 mongoose.Promise = global.Promise;
@@ -31,17 +33,32 @@ var Blog = require('./models/blog'),
     Comment = require('./models/comment'),
     User = require('./models/user');
 
+// Pass User to all routes
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    console.log("user passed in")
+    console.log(req.user)
+    next();
+})
+
 // Routes
 var blogRoutes = require('./routes/blogs'),
     commentRoutes = require('./routes/comments'),
     adminRoutes = require('./routes/admin');
 
 // Passport Setup
+app.use(require('express-session')({
+    secret:"Ecryption sentence to encode/decode session.",
+    resave: false,
+    saveUninitialized: false
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 
 app.use("/content", blogRoutes);
 app.use('/content/:id/comments', commentRoutes);

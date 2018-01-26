@@ -1,7 +1,8 @@
 var express = require('express'),
     router = express.Router({mergeParams: true}),
     Comment = require('../models/comment'),
-    Blog = require('../models/blog');
+    Blog = require('../models/blog'),
+    middleware = require('../middleware');
     
 
 // CREATE COMMENT ROUTE
