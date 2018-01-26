@@ -36,10 +36,6 @@ var blogRoutes = require('./routes/blogs'),
     commentRoutes = require('./routes/comments'),
     adminRoutes = require('./routes/admin');
 
-app.use("/content", blogRoutes);
-app.use('/content/:id/comments', commentRoutes);
-app.use('/admin', adminRoutes);
-
 // Passport Setup
 app.use(passport.initialize());
 app.use(passport.session());
@@ -47,6 +43,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use("/content", blogRoutes);
+app.use('/content/:id/comments', commentRoutes);
+app.use('/admin', adminRoutes);
 
 //
 // ROUTES
