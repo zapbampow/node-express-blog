@@ -23,7 +23,7 @@ app.use(methodOverride("_method"));;
 app.use(expressSanitizer());
 
 // Connect Mongoose
-mongoose.connect('mongodb://localhost/frugalbrewing');
+mongoose.connect('mongodb://localhost/nodeblog');
 mongoose.Promise = global.Promise;
 
 // Models
@@ -63,5 +63,5 @@ app.get('/', function(req, res) {
 // LISTENING
 //
 app.listen(process.env.PORT, process.env.IP, function() {
-  console.log('Frugal Brewing App started and listening.');
+  console.log('Node Blog App started and listening.');
 });

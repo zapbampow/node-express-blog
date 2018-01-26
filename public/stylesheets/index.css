@@ -6,16 +6,16 @@ body {
   font-size: 1.2em;
 }
 
+
 #header-img {
-  margin-top: 2.5em;
-  margin-bottom: 2em;
+  margin: 2.5em auto;
+  width: 100vw;
 }
 
 #main-menu {
   background-color: white;
   font-size: .75em;
 }
-
 
 .red-outline {
   border: 1px red dashed;
