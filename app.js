@@ -6,9 +6,14 @@ var express =         require('express'),
     bodyParser =      require('body-parser'),
     ejs =             require('ejs'),
     expressSanitizer = require ('express-sanitizer'),
+    expressSession = require('express-session'),
     methodOverride =  require('method-override'),
     moment = require('moment'),
-    mongoose        = require('mongoose');
+    mongoose        = require('mongoose'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local'),
+    passportLocalMongoose = require('passport-local-mongoose');
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
@@ -17,16 +22,31 @@ app.locals.moment = require('moment');
 app.use(methodOverride("_method"));;
 app.use(expressSanitizer());
 
+// Connect Mongoose
 mongoose.connect('mongodb://localhost/frugalbrewing');
 mongoose.Promise = global.Promise;
 
 // Models
-var Blog = require('./models/blog')
+var Blog = require('./models/blog'), 
+    Comment = require('./models/comment'),
+    User = require('./models/user');
 
 // Routes
-var blogRoutes = require('./routes/blogs');
+var blogRoutes = require('./routes/blogs'),
+    commentRoutes = require('./routes/comments'),
+    adminRoutes = require('./routes/admin');
 
-app.use("/content", blogRoutes)
+app.use("/content", blogRoutes);
+app.use('/content/:id/comments', commentRoutes);
+app.use('/admin', adminRoutes);
+
+// Passport Setup
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 //
 // ROUTES
@@ -37,7 +57,6 @@ app.get('/', function(req, res) {
   console.log('Root route called.');
   res.render('home');
 });
-
 
 
 

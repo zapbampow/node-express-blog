@@ -1,0 +1,19 @@
+<% include partials/header %>
+
+            
+            <h1 class="ui header">Login</h1>
+            
+            <form class="ui form" action="/admin/user/login" method="POST">
+                <div class="field">
+                    <input name="user[username]" placeholder="Username"></input>
+                </div>
+                <div class="field">
+                    <input name="user[password]" type="password" placeholder="Password"></input>
+                </div>
+                
+                <button class="ui green button" type="submit">Login</button>
+            </form>
+
+        
+
+<% include partials/footer %>

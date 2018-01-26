@@ -51,3 +51,11 @@ body {
   font-size: 0.75em;
 }
 
+.ui.comments {
+  max-width: 100%
+}
+
+.ui.comments .comment.light-comment-background {
+  background-color: #fbfbfb;
+}
+

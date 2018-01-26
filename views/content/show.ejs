@@ -1,48 +1,108 @@
 <% include ../partials/header %>
 
 
-<div class="ui container">
-    <div class="ui two column center stackable relaxed grid">
-        <div class="sixteen wide mobile thirteen wide tablet eleven wide computer column">
-            <div id="post-header" class="ui header"><%= blog.title %></div>
-            
-            <p class="post-meta">
-                <span class="post-author"><%= blog.author %></span>
-                <span class="post-date"><%= blog.date.toDateString() %></span> 
-            </p>
-             
-             <div class="post-content">
-                <img src="<%= blog.image %>" class="ui medium left floated fluid image">
-                <p><%= blog.content %></p>     
-             </div>   
-             
-             <div class="ui divider"></div>
-             
-             <a href="/content/<%= blog.id %>/edit" class="ui secondary button" >Edit Post</a>
-             <form id="delete-post" action="/content/<%= blog.id %>?_method=DELETE" method="POST">
-                 <button class="ui button">Delete Post</button>
-                 
-             </form>
-             
-             <div class="ui divider"></div>
-             
-             <div class="ui segment">
-                 Social share section
-             </div>
-             <div class="ui segment">
-                 Social Follow
-             </div>
-             <div class="ui segment">
-                 Tag/category section
-             </div>
-             
-            
-        </div>
-        
-        <% include ../partials/sidebar%>
-    
-    </div>
+<!-- Blog Content -->
+<div id="post-header" class="ui header"><%= blog.title %></div>
+
+<p class="post-meta">
+    <span class="post-author"><%= blog.author %></span>
+    <span class="post-date"><%= blog.date.toDateString() %></span> 
+</p>
+ 
+ <div class="post-content">
+    <img src="<%= blog.image %>" class="ui medium left floated fluid image">
+    <p><%= blog.content %></p>     
+ </div>   
+ <a href="#comment-box" class="ui green button">Comment on this post</a>
+ 
+ <!-- Edit/Delete Posts -->
+ <div class="ui divider"></div>
+ 
+ <a href="/content/<%= blog.id %>/edit" class="ui secondary button" >Edit Post</a>
+ <form id="delete-post" action="/content/<%= blog.id %>?_method=DELETE" method="POST">
+     <button class="ui button">Delete Post</button>
+     
+ </form>
+ 
+ <div class="ui divider"></div>
+ 
+ <!-- Social Share/follow/etc section -->
+ <div class="ui segment">
+     Social share section
+ </div>
+ <div class="ui segment">
+     Social Follow
+ </div>
+ <div class="ui segment">
+     Tag/category section
+ </div>
+ 
+ <div class="ui hidden divider"></div>
+
+<!-- Comments section-->
+<h1 class="ui horizontal divider header">Comments</h1>
+
+<div class="ui comments segment">
+   <% for(var i=0; i<blog.comments.length; i++) { %>
+<% if(i%2 === 0) { %>
+<div class="comment"> 
+  <div class="content">
+      <div class="author">
+          <%= blog.comments[i].name  %>
+          <span class="metadata">
+              <span class="date"><%= moment(blog.comments[i].date).fromNow() %></span>
+          </span>  
+      </div>
+      
+      <div class="text">
+          <%= blog.comments[i].message %>
+      </div>
+      <div class="actions">
+          <a class="reply">Reply</a>
+      </div>
+      
+  </div>
 </div>
+<% } else { %>
+<div class="comment light-comment-background">
+  <div class="content">
+      <div class="author">
+          <%= blog.comments[i].name  %>
+          <span class="metadata">
+              <span class="date"><%= moment(blog.comments[i].date).fromNow() %></span>
+          </span>  
+      </div>
+      
+      <div class="text">
+          <%= blog.comments[i].message %>
+      </div>
+      <div class="actions">
+          <a class="reply">Reply</a>
+      </div>
+      
+  </div>
+</div>
+<% }} %>
+     
+    
+    <!--The Comment Box-->
+    <h3 id="comment-box" class="ui small header">Add a Comment</h3>
+    <form class="ui form" action="/content/<%= blog.id %>/comments" method="POST">
+        <div class="field">
+            <input name="comment[name]" placeholder="Your Name"></input>
+        </div>
+        <div class="field">
+            <input name="comment[email]" placeholder="Email (Never displayed or shared)"></input>
+        </div>
+        <div class="field">
+          <textarea name="comment[message]" placeholder="Your comment here"></textarea>
+        </div>
+        <button type="submit" class="ui green labeled submit icon button">
+          <i class="icon edit"></i> Comment
+        </button>
+      </form>
+</div>
+            
 
 <% include ../partials/footer %>
 

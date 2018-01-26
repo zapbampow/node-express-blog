@@ -1,15 +1,24 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    passportLocalMongoose = require('passport-local-mongoose');
 
 //
-// BLOG CHEMA
+// BLOG SCHEMA
 //
 var blogSchema = new mongoose.Schema({
-  title: String,
-  date: {type: Date, default: Date.now},
-  author: String,
-  content: String,
-  image: String, 
+title: String,
+date: {type: Date, default: Date.now},
+author: String,
+content: String,
+image: String, 
+comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Comment"
+        }
+        ]
 });
+
+// blogSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('Blog', blogSchema);
 

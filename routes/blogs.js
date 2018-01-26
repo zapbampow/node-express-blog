@@ -37,7 +37,7 @@ router.post('/', function(req, res){
 
 // SHOW ARTICLE ROUTE
 router.get('/:id', function(req, res){
-  Blog.findById(req.params.id, function(err, foundBlog){
+  Blog.findById(req.params.id).populate('comments').exec(function(err, foundBlog){
     if(err){
       console.log(err)
     } else {

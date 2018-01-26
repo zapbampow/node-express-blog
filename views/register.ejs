@@ -1,0 +1,40 @@
+<% include partials/header %>
+
+            
+            <h1 class="ui header">Register a new user</h1>
+            
+            <form class="ui form" action="/admin/user" method="POST">
+                <div class="field">
+                    <input name="user[name]" placeholder="Name"></input>
+                </div>
+                <div class="field">
+                    <input name="user[username]" placeholder="Username"></input>
+                </div>
+                <div class="field">
+                    <input name="user[email]" placeholder="Email"></input>
+                </div>
+                <div class="inline fields">
+                    <label for="user[permission]">Select the permission level of new user:</label>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                        <input name="user[permission]"  type="radio" value="admin">
+                        <label>Admin</label>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                        <input name="user[permission]"  type="radio" value="write" checked>
+                        <label>Write</label>
+                      </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <input name="user[password]" type="password" placeholder="Password"></input>
+                </div>
+                
+                <button class="ui green button" type="submit">Submit</button>
+            </form>
+
+        
+
+<% include partials/footer %>
