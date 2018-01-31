@@ -10,7 +10,11 @@ var userSchema = new mongoose.Schema({
     username: String,
     email: String,
     permission: String,
-    password: String
+    password: String,
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Blog'
+    }]
 });
 
 userSchema.plugin(passportLocalMongoose);
