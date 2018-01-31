@@ -12,5 +12,18 @@ middlewareObj.isLoggedIn = function(req, res, next){
     }
 }
 
+middlewareObj.isAdmin = function(req, res, next){
+    console.log("Current user is " + req.user)
+    if(req.isAuthenticated()){
+        if(req.user.permission == 'admin'){
+            next();
+        } else {
+            res.redirect('/admin/user/login')
+        }
+    } else {
+        res.redirect('/admin/user/login')
+    }
+}
+
 
 module.exports = middlewareObj;

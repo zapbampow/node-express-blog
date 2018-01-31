@@ -36,8 +36,7 @@ var Blog = require('./models/blog'),
 // Pass User to all routes
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
-    console.log("user passed in")
-    console.log(req.user)
+    console.log("user passed in is " + res.locals.currentUser)
     next();
 })
 
@@ -74,15 +73,6 @@ app.get('/', function(req, res) {
   res.render('home');
 });
 
-
-// Middleware Test
-function isAdmin(user) {
-    if(user.permission === 'admin') {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 
 //
