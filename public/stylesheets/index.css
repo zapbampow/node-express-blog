@@ -40,8 +40,12 @@ body {
   height: 1em;
 }
 
-#delete-post {
+#delete-post{
   display: inline;
+}
+
+form.delete-comment, form.edit-button {
+  display:inline;
 }
 
 .post-meta-margin {

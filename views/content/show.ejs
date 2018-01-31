@@ -61,8 +61,18 @@
           <%= blog.comments[i].message %>
       </div>
       <div class="actions">
-          <a class="reply">Reply</a>
+          <a href="#comment-box" class="reply">Reply</a>
+          <% if(currentUser && currentUser.permission == 'admin') { %>
+              <form class="edit-button" action="/content/<%= blog.id %>/comments/<%= blog.comments[i].id %>/edit" method="GET">
+                 <button class="ui inverted mini green button">Edit</button>
+              </form>
+              <form class="delete-comment" action="/content/<%= blog.id %>/comments/<%= blog.comments[i].id %>?_method=DELETE" method="POST">
+                  <button class="ui inverted mini red button delete-comment">Delete</button>
+              </form>
+          <% } %>
+
       </div>
+
       
   </div>
 </div>
@@ -81,7 +91,14 @@
       </div>
       <div class="actions">
           <a class="reply">Reply</a>
+          <% if(currentUser && currentUser.permission == 'admin') { %>
+              <a class="ui inverted mini green button" href="/content/<%= blog.id %>/comments/<%= blog.comments[i].id %>/edit">Edit</a>
+              <form class="delete-comment" action="/content/<%= blog.id %>/comments/<%= blog.comments[i].id %>?_method=DELETE" method="POST">
+                  <button class="ui inverted mini red button delete-comment">Delete</button>
+              </form>
+          <% } %>
       </div>
+
       
   </div>
 </div>
@@ -104,6 +121,7 @@
           <i class="icon edit"></i> Comment
         </button>
       </form>
+      
 </div>
             
 

@@ -103,7 +103,7 @@ router.delete('/:id', middleware.isLoggedIn, function(req, res){
 })
 
 
-// TEST AUTHOR POSTS
+// AUTHOR INDEX ROUTE - Shows POSTS of single author
 router.get('/author/:author_name', function(req, res) {
     User.findOne({name:req.params.author_name}, function(err, foundAuthor){
       if(err){

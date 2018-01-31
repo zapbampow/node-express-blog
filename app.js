@@ -33,12 +33,7 @@ var Blog = require('./models/blog'),
     Comment = require('./models/comment'),
     User = require('./models/user');
 
-// Pass User to all routes
-app.use(function(req, res, next){
-    res.locals.currentUser = req.user;
-    console.log("user passed in is " + res.locals.currentUser)
-    next();
-})
+
 
 // Routes
 var blogRoutes = require('./routes/blogs'),
@@ -57,6 +52,13 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+// Pass User to all routes
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    console.log("user passed in is " + res.locals.currentUser)
+    next();
+})
 
 
 app.use("/content", blogRoutes);

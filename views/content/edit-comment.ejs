@@ -1,0 +1,19 @@
+<% include ../partials/header %>
+
+<h3 id="comment-box" class="ui header">Edit Comment</h3>
+
+<form class="ui form" action="/content/<%= blog._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+    <div class="field">
+        <input name="comment[name]" value="<%= comment.name %>"></input>
+    </div>
+    <div class="field">
+        <input name="comment[email]" value="<%= comment.email %>"></input>
+    </div>
+    <div class="field">
+      <textarea name="comment[message]"><%= comment.message %></textarea>
+    </div>
+    <button type="submit" class="ui green labeled submit icon button">
+      <i class="icon edit"></i> Edit Comment
+    </button>
+</form>
+<% include ../partials/footer %>
