@@ -75,6 +75,15 @@ app.get('/', function(req, res) {
 });
 
 
+// Middleware Test
+function isAdmin(user) {
+    if(user.permission === 'admin') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 //
 // LISTENING

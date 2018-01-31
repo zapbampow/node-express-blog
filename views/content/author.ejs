@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+
+<h1 class="ui header"><%= author.name %></h1>
+
+<div class="ui divided items">
+    <% blog.forEach(function(post) {    %> 
+        <% postId.forEach(function(pId) { %>
+            <% if (post._id !== pId) { %>
+              <div class="item">
+                <div class="image">
+                  <img src="<%= post.image %>">
+                </div>
+                <div class="content">
+                  <a class="header"><%= post.title %></a>
+                  <div class="extra">
+                    <span><%= moment(post.date).format('MMM DD, YYYY') %></span>
+                  </div>
+                  <div class="description">
+                      <% var shortContent = post.content.substring(0, 100); %>
+                    <p>
+                        <%= shortContent %>... <a href="/content/<%= post.id %>" class="mini basic green ui button">Read more</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+        <% }) %>
+    <% }) %>
+ </div>
+
+
+
+
+
+<% include ../partials/footer %>

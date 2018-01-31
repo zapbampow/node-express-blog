@@ -11,17 +11,18 @@ router.get('/', middleware.isLoggedIn, function(req, res){
 })
 
 // NEW USER ROUTE
-router.get('/user/new', middleware.isLoggedIn, function(req, res){
+// TODO: Add isAdmin middleware instead of isLoggedIn
+router.get('/user/new', function(req, res){
   res.render('register')
 })
 
 // REGISTER NEW USER CREATE ROUTE
-router.post('/user', middleware.isLoggedIn, function(req, res){
+router.post('/user', function(req, res){
     console.log('Something is happening')
   User.register(new User({name:req.body.name, username: req.body.username, email: req.body.email, permission: req.body.permission}), req.body.password, function(err, user){
     if(err) {
       console.log(err);
-      res.redirect('/user/new')
+      res.redirect('/admin/user/new')
     } else {
       passport.authenticate('local')(req, res, function(){
           res.redirect("/admin")

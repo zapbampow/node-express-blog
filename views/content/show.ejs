@@ -5,7 +5,7 @@
 <div id="post-header" class="ui large header post-header"><%= blog.title %></div>
 
 <p class="post-meta">
-    <span class="post-author"><%= blog.author %></span>
+    <span class="post-author"><%= blog.author.name %></span>
     <span class="post-date"><%= blog.date.toDateString() %></span> 
 </p>
  
@@ -14,6 +14,8 @@
     <p><%= blog.content %></p>     
  </div>   
  <a href="#comment-box" class="ui green button">Comment on this post</a>
+ 
+
  
  <!-- Edit/Delete Posts -->
  <div class="ui divider"></div>
@@ -24,6 +26,7 @@
      
  </form>
  
+
  <div class="ui divider"></div>
  
  <!-- Social Share/follow/etc section -->

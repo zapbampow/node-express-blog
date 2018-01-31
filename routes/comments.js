@@ -15,7 +15,6 @@ router.post('/', function(req, res){
                 if(err){
                     console.log(err);
                 } else {
-                    console.log(comment)
                     blog.comments.push(comment._id);
                     blog.save();
                     res.redirect("/content/" + req.params.id)
