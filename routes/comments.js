@@ -46,6 +46,8 @@ router.get('/:comment_id/edit', middleware.isAdmin, function(req, res){
 
 // UPDATE COMMENTS ROUTE
 router.put('/:comment_id', middleware.isAdmin, function(req, res){
+    req.body.comment.message = req.sanitize(req.body.comment.message);
+    
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, comment){
         if(err){
             console.log(err);

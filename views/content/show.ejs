@@ -64,7 +64,7 @@
           <%= blog.comments[i].message %>
       </div>
       <div class="actions">
-          <a href="#comment-box" class="reply">Reply</a>
+          <a href="#comment-box" class="reply" value="<%= blog.comments[i].name %>">Reply</a>
           <% if(currentUser && currentUser.permission == 'admin') { %>
               <form class="edit-button" action="/content/<%= blog.id %>/comments/<%= blog.comments[i].id %>/edit" method="GET">
                  <button class="ui inverted mini green button">Edit</button>
@@ -93,7 +93,7 @@
           <%= blog.comments[i].message %>
       </div>
       <div class="actions">
-          <a class="reply">Reply</a>
+          <a href="#comment-box" class="reply" value="<%= blog.comments[i].name %>">Reply</a>
           <% if(currentUser && currentUser.permission == 'admin') { %>
               <a class="ui inverted mini green button" href="/content/<%= blog.id %>/comments/<%= blog.comments[i].id %>/edit">Edit</a>
               <form class="delete-comment" action="/content/<%= blog.id %>/comments/<%= blog.comments[i].id %>?_method=DELETE" method="POST">
@@ -112,7 +112,7 @@
     <h3 id="comment-box" class="ui small header">Add a Comment</h3>
     <form class="ui form" action="/content/<%= blog.id %>/comments" method="POST">
         <div  class="field">
-          <textarea name="comment[message]" placeholder="Your comment here" required></textarea>
+          <textarea id="comment-text" name="comment[message]" placeholder="Your comment here" required></textarea>
         </div>
         <div class="field">
             <input  name="comment[name]" placeholder="Your Name" required></input>
