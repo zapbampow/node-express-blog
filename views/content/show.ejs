@@ -5,13 +5,16 @@
 <div id="post-header" class="ui large header post-header"><%= blog.title %></div>
 
 <p class="post-meta">
-    <span class="post-author"><%= blog.author.name %></span>
-    <span class="post-date"><%= blog.date.toDateString() %></span> 
+    <span class="post-meta-margin"><%= moment(blog.date).format('MMM DD, YYYY'); %></span>
+    <span class="post-meta-margin">|</span>
+    <span>By <%= blog.author.name %></span>
+    
+    
 </p>
  
  <div class="post-content">
     <img src="<%= blog.image %>" class="ui medium left floated fluid image">
-    <p><%= blog.content %></p>     
+    <p><%- blog.content %></p>     
  </div>   
  <a href="#comment-box" class="ui green button">Comment on this post</a>
  
@@ -108,14 +111,14 @@
     <!--The Comment Box-->
     <h3 id="comment-box" class="ui small header">Add a Comment</h3>
     <form class="ui form" action="/content/<%= blog.id %>/comments" method="POST">
-        <div class="field">
-            <input name="comment[name]" placeholder="Your Name"></input>
+        <div  class="field">
+          <textarea name="comment[message]" placeholder="Your comment here" required></textarea>
         </div>
         <div class="field">
-            <input name="comment[email]" placeholder="Email (Never displayed or shared)"></input>
+            <input  name="comment[name]" placeholder="Your Name" required></input>
         </div>
         <div class="field">
-          <textarea name="comment[message]" placeholder="Your comment here"></textarea>
+            <input  name="comment[email]" placeholder="Email (Never displayed or shared)" required></input>
         </div>
         <button type="submit" class="ui green labeled submit icon button">
           <i class="icon edit"></i> Comment

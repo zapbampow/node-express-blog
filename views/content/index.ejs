@@ -12,14 +12,14 @@
             <p class="post-meta">
               <span class="post-meta-margin"><%= moment(blog[latest].date).format('MMM DD, YYYY'); %></span>
               <span class="post-meta-margin">|</span>
-              <span>By <%= blog[latest].author %></span>
+              <span>By <%= blog[latest].author.name %></span>
             </p>
 
             <div class="post-content">
               <img src="<%= blog[latest].image %>" class="ui medium left floated fluid image">
               <% var shortContent = blog[latest].content.substring(0, 750) %>
                 <p>
-                  <%= shortContent %>... <a href="/content/<%= blog[latest].id %>" class="mini basic green ui button">Read more</a></p>
+                  <%- shortContent %>... <a href="/content/<%= blog[latest].id %>" class="mini basic green ui button">Read more</a></p>
             </div>
         </div>
 
