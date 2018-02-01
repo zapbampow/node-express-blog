@@ -7,6 +7,8 @@ var express = require('express'),
 
 // CREATE COMMENT ROUTE
 router.post('/', function(req, res){
+    req.body.comment.message = req.sanitize(req.body.comment.message);
+
     Blog.findById(req.params.id, function (err, blog){
         if(err){
             console.log(err)
@@ -26,6 +28,7 @@ router.post('/', function(req, res){
 
 // EDIT COMMENT ROUTE
 router.get('/:comment_id/edit', middleware.isAdmin, function(req, res){
+    
     Blog.findById(req.params.id, function(err, foundBlog){
         if(err){
             console.log(err);
