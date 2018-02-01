@@ -38,7 +38,8 @@ var Blog = require('./models/blog'),
 // Routes
 var blogRoutes = require('./routes/blogs'),
     commentRoutes = require('./routes/comments'),
-    adminRoutes = require('./routes/admin');
+    adminRoutes = require('./routes/admin'),
+    searchRoute = require('./routes/search');
 
 // Passport Setup
 app.use(require('express-session')({
@@ -64,6 +65,7 @@ app.use(function(req, res, next){
 app.use("/content", blogRoutes);
 app.use('/content/:id/comments', commentRoutes);
 app.use('/admin', adminRoutes);
+app.use('/search', searchRoute);
 
 //
 // ROUTES

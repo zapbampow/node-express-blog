@@ -1,0 +1,33 @@
+<% include partials/header %>
+
+<h1 class="ui header">Search Results</h1>
+
+<% if(blog[0]){ %>
+<div class="ui divided items">
+    <% blog.forEach(function(post){ %>
+            <div class="item">
+                <div class="image">
+                  <img src="<%= post.image %>">
+                </div>
+                <div class="content">
+                  <a class="header"><%= post.title %></a>
+                  <div class="extra">
+                    <span><%= moment(post.date).format('MMM DD, YYYY') %></span>
+                  </div>
+                  <div class="description">
+                      <% var shortContent = post.content.substring(0, 100); %>
+                    <p>
+                        <%= shortContent %>... <a href="/content/<%= post.id %>" class="mini basic green ui button">Read more</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+    <% }) %>
+    <% } else { %>
+        <p class="ui small header">Sorry. No search results.</p>
+    <% } %>
+    
+    
+</div>
+
+<% include partials/footer %>

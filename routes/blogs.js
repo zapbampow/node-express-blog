@@ -112,8 +112,6 @@ router.get('/author/:author_name', function(req, res) {
           if(err){
             console.log(err)
           } else {
-            console.log("foundAuthor.posts = " + foundAuthor.posts)
-            console.log("blog = " + blog)
             res.render('content/author', {author:foundAuthor, postId:foundAuthor.posts, blog:blog});
           }
         })
