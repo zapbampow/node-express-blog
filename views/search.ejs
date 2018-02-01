@@ -2,8 +2,9 @@
 
 <h1 class="ui header">Search Results</h1>
 
-<% if(blog[0]){ %>
+
 <div class="ui divided items">
+    <% if(blog.length > 0){ %>
     <% blog.forEach(function(post){ %>
             <div class="item">
                 <div class="image">
@@ -26,8 +27,7 @@
     <% } else { %>
         <p class="ui small header">Sorry. No search results.</p>
     <% } %>
-    
-    
 </div>
+    
 
 <% include partials/footer %>
