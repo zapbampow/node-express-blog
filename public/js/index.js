@@ -7,13 +7,13 @@ $(document).ready(function(){
     })
     
     // Search functionality for search bar
-    $('#search-bar').keypress(function(e){
-        var keycode = (e.keyCode ? e.keyCode : e.which);
+    // $('#search-bar').keypress(function(e){
+    //     var keycode = (e.keyCode ? e.keyCode : e.which);
         
-        if(keycode == '13') {
-            console.log(req.body.search)
-        }
-    })
+    //     if(keycode == '13') {
+    //         console.log()
+    //     }
+    // })
     
 })
 

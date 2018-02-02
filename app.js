@@ -10,6 +10,7 @@ var express =         require('express'),
     methodOverride =  require('method-override'),
     moment = require('moment'),
     mongoose        = require('mongoose'),
+    nodemailer = require('nodemailer'),
     passport = require('passport'),
     LocalStrategy = require('passport-local'),
     passportLocalMongoose = require('passport-local-mongoose');
@@ -36,7 +37,8 @@ var Blog = require('./models/blog'),
 
 
 // Routes
-var blogRoutes = require('./routes/blogs'),
+var indexRoutes = require('./routes/index'),
+    blogRoutes = require('./routes/blogs'),
     commentRoutes = require('./routes/comments'),
     adminRoutes = require('./routes/admin'),
     searchRoute = require('./routes/search');
@@ -62,6 +64,7 @@ app.use(function(req, res, next){
 })
 
 
+app.use('/', indexRoutes);
 app.use("/content", blogRoutes);
 app.use('/content/:id/comments', commentRoutes);
 app.use('/admin', adminRoutes);
