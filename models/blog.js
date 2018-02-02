@@ -9,7 +9,7 @@ title: String,
 date: {type: Date, default: Date.now},
 author: {
     id:{
-    type:mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
     },
     name: String

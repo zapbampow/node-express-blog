@@ -33,12 +33,10 @@ router.post('/', middleware.isLoggedIn, function(req, res){
     if(err){
       console.log(err)
     } else {
-      console.log("Before user.findone req.user is the following" + req.user);
       User.findOne({name:req.user.name}, function(err, foundUser){
         if(err){
           console.log(err)
         } else {
-          console.log("foundUser inside user.findon is " + foundUser);
           foundUser.posts.push(blog._id);
           foundUser.save(function(err, data){
             if(err){
@@ -66,7 +64,7 @@ router.get('/:id', function(req, res){
 })
 
 // EDIT ARTICLE ROUTE
-router.get('/:id/edit', middleware.isLoggedIn, function(req, res){
+router.get('/:id/edit', /*middleware.checkPostOwnership,*/ function(req, res){
   console.log("id is" + req.params.id)
   Blog.findById(req.params.id, function(err, blog){
     if(err) {
@@ -78,7 +76,7 @@ router.get('/:id/edit', middleware.isLoggedIn, function(req, res){
 })
 
 // UPDATE ARTICLE ROUTE
-router.put('/:id', middleware.isLoggedIn, function(req, res){
+router.put('/:id', middleware.checkPostOwnership, function(req, res){
   req.body.blog.content = req.sanitize(req.body.blog.content);
 
   Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, blog){
@@ -91,7 +89,7 @@ router.put('/:id', middleware.isLoggedIn, function(req, res){
 })
 
 // DESTROY ARTICLE ROUTE
-router.delete('/:id', middleware.isLoggedIn, function(req, res){
+router.delete('/:id', middleware.isAdmin, function(req, res){
   Blog.findByIdAndRemove(req.params.id, function(err){
     if(err){
       console.log(err)

@@ -16,10 +16,11 @@
     <img src="<%= blog.image %>" class="ui medium left floated fluid image">
     <p><%- blog.content %></p>     
  </div>   
- <a href="#comment-box" class="ui green button">Comment on this post</a>
+ <div class="ui hidden divider"></div>
+ <a href="#comment-box" class="ui mini inverted green button">Comment on this post</a>
  
 
- 
+ <% if(currentUser && (currentUser.permission == "admin" || currentUser.name == blog.author.name)){ %>
  <!-- Edit/Delete Posts -->
  <div class="ui divider"></div>
  
@@ -28,6 +29,7 @@
      <button class="ui button">Delete Post</button>
      
  </form>
+ <% } %>
  
 
  <div class="ui divider"></div>

@@ -25,5 +25,26 @@ middlewareObj.isAdmin = function(req, res, next){
     }
 }
 
+middlewareObj.checkPostOwnership = function(req, res, next) {
+    if(req.isAuthenticated()){
+        Blog.findById(req.params.id, function(err, foundPost){
+        if(err || !foundPost) {
+            // req.flash("error", "There was a problem. Please try again.");
+            res.redirect("back")
+        } else {
+            if(foundPost.author.id.equals(req.user._id) || req.user.permission == 'admin'){
+                next();
+            } else {
+                // req.flash("error", "Sorry. Only the creator of this campground can do that.");
+                res.redirect("back"); 
+            }
+        }
+    });
+    } else {
+        // req.flash("error", "Please log in first.");
+        res.redirect("back")
+    }
+}
+
 
 module.exports = middlewareObj;
