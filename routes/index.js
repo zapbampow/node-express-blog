@@ -6,6 +6,13 @@ var express = require('express'),
     nodemailer = require('nodemailer');
     
     
+// ROOT ROUTE
+router.get('/', function(req, res) {
+  console.log('Root route called.');
+  res.render('home');
+});
+
+
 // CONTACT FORM GET ROUTE
 router.get('/contact', function(req, res){
     res.render('content/contact');
@@ -45,15 +52,15 @@ router.post('/contact', function(req, res){
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.log(error);
-            return res.redirect('back') //Add flash message
+            req.flash("error", "Something went wrong. Please try again.")
+            return res.redirect('back') 
         } 
         console.log('Message sent: %s', info.messageId);
         // Preview only available when sending through an Ethereal account
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+        req.flash("success", "Your message was successfully sent. We'll get back to you as soon as we can.")
         res.render('contact'); //Add flash message
 
-        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
     });
 })
 

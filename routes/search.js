@@ -11,6 +11,7 @@ router.get('/', function(req, res){
     Blog.find({$or:[{title:regex}, {author:regex}, {content:regex}]}, function(err, blog){
         if(err){
             console.log(err)
+            req.flash("error", "Hmm. There was a problem with that search. Please try again.")
         } else {
             res.render('search', {blog:blog})
         }

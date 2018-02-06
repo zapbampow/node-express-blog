@@ -18,10 +18,10 @@ router.get('/user/new', middleware.isAdmin,  function(req, res){
 
 // REGISTER NEW USER CREATE ROUTE
 router.post('/user', middleware.isAdmin, function(req, res){
-    console.log('Something is happening')
   User.register(new User({name:req.body.name, username: req.body.username, email: req.body.email, permission: req.body.permission}), req.body.password, function(err, user){
     if(err) {
       console.log(err);
+      req.flash("error", "Something went wrong creating a new user.")
       res.redirect('/admin/user/new')
     } else {
       passport.authenticate('local')(req, res, function(){
@@ -38,15 +38,16 @@ router.get('/user/login', function(req, res){
 
 // LOGIN POST ROUTE
 router.post('/user/login', passport.authenticate('local', {
-  // successRedirect:"/admin",
   failureRedirect:"/admin/user/login"
 }), function(req, res){
+  req.flash("Success", "Congratulations on logging in.")
   res.redirect('/admin')
 })
 
 // LOGOUT ROUTE
 router.get('/logout', function(req, res) {
   req.logout();
+  req.flash("success", "You are now logged out.")
   res.redirect('/content')
 })
 

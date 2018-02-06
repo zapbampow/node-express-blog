@@ -11,6 +11,8 @@ router.get('/', function(req, res){
   Blog.find({}, function(err, blog){
     if(err){
       console.log(err)
+      req.flash("error", "Sorry. We couldn't find that article.")
+      res.redirect('back')
     } else {
         res.render("content/index", {blog:blog})
     }
@@ -32,6 +34,7 @@ router.post('/', middleware.isLoggedIn, function(req, res){
   Blog.create(newPost, function(err, blog){
     if(err){
       console.log(err)
+      req.flash("error", "Something went wrong creating a new post. <p>" + err + "</p>")
     } else {
       User.findOne({name:req.user.name}, function(err, foundUser){
         if(err){
@@ -47,6 +50,7 @@ router.post('/', middleware.isLoggedIn, function(req, res){
           })
         }
       })
+      req.flash("Success", "Congrats. Your article was created successfully.")
       res.redirect('/content/' + blog.id)
     }
   })
@@ -57,6 +61,8 @@ router.get('/:id', function(req, res){
   Blog.findById(req.params.id).populate('comments').exec(function(err, foundBlog){
     if(err){
       console.log(err)
+      req.flash("error", "Sorry. We couldn't find that blog.");
+      res.redirect('back')
     } else {
       res.render("content/show", {blog:foundBlog})
     }
@@ -64,11 +70,13 @@ router.get('/:id', function(req, res){
 })
 
 // EDIT ARTICLE ROUTE
-router.get('/:id/edit', /*middleware.checkPostOwnership,*/ function(req, res){
+router.get('/:id/edit', middleware.checkPostOwnership, function(req, res){
   console.log("id is" + req.params.id)
   Blog.findById(req.params.id, function(err, blog){
     if(err) {
       console.log(err)
+      req.flash("error", "Hmm. Something went wrong. We couldn't find that article. Maybe try again.")
+      res.redirect('back')
     } else {
       res.render('content/edit', {blog:blog})
     }
@@ -83,6 +91,7 @@ router.put('/:id', middleware.checkPostOwnership, function(req, res){
     if(err){
       console.log(err)
     } else {
+      req.flash("success", "This article was updated successfully.")
       res.redirect("/content/" + req.params.id)
     }
   })
@@ -105,6 +114,7 @@ router.get('/author/:author_name', function(req, res) {
     User.findOne({name:req.params.author_name}, function(err, foundAuthor){
       if(err){
         console.log(err)
+        req.flash("error", "Hmm. That name doesn't seem to be one of our authors.")
       } else {
         Blog.find({}, function(err, blog){
           if(err){

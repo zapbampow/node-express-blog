@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
-  <link rel='stylesheet' href='/stylesheets/index.css'>
+  <link rel="stylesheet" href="/stylesheets/rrssb.css" >
+  <link rel='stylesheet' href='/stylesheets/index.css' >
 
   <title>Node-Express-Mongo-SemanticUI Blog</title>
 
@@ -15,7 +16,7 @@
   <!-- NavBar -->
   <div id="main-menu" class="ui borderless secondary pointing fixed menu">
     <div  class="ui container">
-      <a href="/" class="item"><i class="bar icon"></i>NodeBlog</a>
+      <a href="/content" class="item"><i class="bar icon"></i>NodeBlog</a>
       <a href="#" class="item"><i class="meh icon"></i>About us</a>
       <a href="#" class="item"><i class="angle double right icon"></i>Methods</a>
       <a href="#" class="item"><i class="settings icon"></i>DIY</a>
@@ -39,7 +40,21 @@
 <img src="/images/main-header.png" alt="main-header" class="ui image" id="header-img">  
 
 
+
 <!-- The Beginning of the content -->
 <div class="ui container">
     <div class="ui two column center stackable relaxed grid">
         <div class="sixteen wide mobile ten wide tablet eleven wide computer column">
+          
+          <!-- Flash Messages -->
+          <% if(error[0]){%> 
+          <div class="ui negative message" role="alert">
+            <p><%= error %></p>
+          </div>
+          <% } %>
+          
+          <% if(success[0]){%>
+          <div class="ui positive message" role="alert">
+            <p><%= success %></p>
+          </div>
+          <% } %>

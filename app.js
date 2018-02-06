@@ -1,18 +1,19 @@
 //
 // SETUP
 //
-var express =         require('express'),
-    app =             express(),
-    bodyParser =      require('body-parser'),
-    ejs =             require('ejs'),
-    expressSanitizer = require ('express-sanitizer'),
-    expressSession = require('express-session'),
-    methodOverride =  require('method-override'),
-    moment = require('moment'),
-    mongoose        = require('mongoose'),
-    nodemailer = require('nodemailer'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local'),
+var express =           require('express'),
+    app =               express(),
+    bodyParser =        require('body-parser'),
+    ejs =               require('ejs'),
+    expressSanitizer =  require ('express-sanitizer'),
+    expressSession =    require('express-session'),
+    flash =             require('connect-flash'),
+    methodOverride =    require('method-override'),
+    moment =            require('moment'),
+    mongoose =          require('mongoose'),
+    nodemailer =        require('nodemailer'),
+    passport =          require('passport'),
+    LocalStrategy =     require('passport-local'),
     passportLocalMongoose = require('passport-local-mongoose');
 
 
@@ -22,6 +23,7 @@ app.set('view engine', 'ejs');
 app.locals.moment = require('moment');
 app.use(methodOverride("_method"));;
 app.use(expressSanitizer());
+app.use(flash());
 
 
 
@@ -59,7 +61,8 @@ passport.deserializeUser(User.deserializeUser());
 // Pass User to all routes
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
-    console.log("user passed in is " + res.locals.currentUser)
+    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
     next();
 })
 
@@ -70,15 +73,6 @@ app.use('/content/:id/comments', commentRoutes);
 app.use('/admin', adminRoutes);
 app.use('/search', searchRoute);
 
-//
-// ROUTES
-//
-
-// ROOT ROUTE
-app.get('/', function(req, res) {
-  console.log('Root route called.');
-  res.render('home');
-});
 
 
 
