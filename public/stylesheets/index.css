@@ -81,3 +81,7 @@ form.delete-comment, form.edit-button {
 .ui.divider.sidebar-divider-margin{
   margin: 2rem auto;
 }
+
+.ui.list .list > .item a, .ui.list > .item a {
+  color: rgba(255,255,255,.9);;
+}
