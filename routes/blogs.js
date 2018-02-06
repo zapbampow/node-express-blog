@@ -19,6 +19,19 @@ router.get('/', function(req, res){
   })
 })
 
+// ALL ARTICLES ROUTE
+router.get('/all/:page_num', function(req, res){
+  console.log(req.params.page_num);
+  Blog.paginate({}, {page:req.params.page_num, limit:10}, function(err, posts){
+    if(err){
+      req.flash('error', 'Something went wrong finding those articles. Please try again.');
+      res.redirect('back');
+    } else {
+      res.render('content/all', {posts:posts});
+    }
+  })
+})
+
 
 // NEW ARTICLE ROUTE
 router.get('/new', middleware.isLoggedIn, function(req, res){
@@ -116,10 +129,11 @@ router.get('/author/:author_name', function(req, res) {
         console.log(err)
         req.flash("error", "Hmm. That name doesn't seem to be one of our authors.")
       } else {
-        Blog.find({}, function(err, blog){
+        Blog.find({'author.id':foundAuthor.id}, function(err, blog){
           if(err){
             console.log(err)
           } else {
+            console.log(blog);
             res.render('content/author', {author:foundAuthor, postId:foundAuthor.posts, blog:blog});
           }
         })

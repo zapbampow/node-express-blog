@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-    passportLocalMongoose = require('passport-local-mongoose');
+    mongoosePaginate = require('mongoose-paginate');
 
 //
 // BLOG SCHEMA
@@ -24,7 +24,7 @@ comments: [
         ]
 });
 
-// blogSchema.plugin(passportLocalMongoose);
+blogSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Blog', blogSchema);
 

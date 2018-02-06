@@ -1,0 +1,21 @@
+<% include ../partials/header %>
+
+    <% posts.docs.forEach(function(post) { %>
+        <div class="ui segment">
+            <p>Title: <%= post.title %></p>
+        </div>
+    <% }) %>
+    
+    <% if(posts.pages > 1) { %>
+          <% var current = posts.page; %>
+          <%  %>
+          <div class="ui basic buttons">
+              <div class="ui button">First</div>
+              <div class="ui button">1</div>
+              <div class="ui button">Last</div>
+            </div>
+          
+    <% } %>
+
+
+<% include ../partials/footer %>
