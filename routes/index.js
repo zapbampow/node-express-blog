@@ -70,5 +70,10 @@ router.get('/about', function(req, res) {
     res.render("content/about");
 })
 
+// CONTRIBUTE SHOW PAGE
+router.get('/contribute', function(req, res){
+    res.render('content/contribute');
+})
+
 //========================================
 module.exports = router;

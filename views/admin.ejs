@@ -1,9 +1,16 @@
 <% include partials/header %>
 
-<h1>The soon to be admin page</h1>
-<ul>
-    <li><a href="/admin/user/new">Create New User</a></li>
-    <li><a href="/content/new">Create New Post</a></li>
-</ul>
+<h1>Admin page</h1>
+
+<div class="ui icon green button"><i class="write icon"></i>Create New Post</div>
+
+<div class="ui hidden divider"></div>
+
+<% if(currentUser.permission == 'admin') { %>
+
+<div class="ui icon button"><i class="user icon"></i>Create New User</div>
+<div class="ui icon button"><i class="user outline icon"></i><i class="text cursor icon"></i>  Edit User</div>
+
+<% } %>
 
 <% include partials/footer %>
