@@ -64,5 +64,11 @@ router.post('/contact', function(req, res){
     });
 })
 
+
+// ABOUT SHOW PAGE
+router.get('/about', function(req, res) {
+    res.render("content/about");
+})
+
 //========================================
 module.exports = router;
