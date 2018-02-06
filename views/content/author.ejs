@@ -3,9 +3,7 @@
 <h1 class="ui header"><%= author.name %></h1>
 
 <div class="ui divided items">
-    <% blog.forEach(function(post) {    %> 
-        <% postId.forEach(function(pId) { %>
-            <% if (post._id !== pId) { %>
+        <% blog.forEach(function(post) {    %> 
               <div class="item">
                 <div class="image">
                   <img src="<%= post.image %>">
@@ -23,8 +21,6 @@
                   </div>
                 </div>
               </div>
-            <% } %>
-        <% }) %>
     <% }) %>
  </div>
 
