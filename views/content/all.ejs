@@ -7,13 +7,44 @@
     <% }) %>
     
     <% if(posts.pages > 1) { %>
-          <% var current = posts.page; %>
-          <%  %>
-          <div class="ui basic buttons">
-              <div class="ui button">First</div>
-              <div class="ui button">1</div>
-              <div class="ui button">Last</div>
-            </div>
+        <div class="ui basic buttons">
+          
+          <!--First Button-->
+          <% if(current == 1) { %>
+              <div class="ui button disabled"><a>First</a></div>
+          <% } else { %>
+              <div class="ui button"><a href="/content/all/1">First</a></div>
+          <% } %>
+          
+          <!--Middle Buttons-->
+          <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+          
+          <% if(i !== 1){ %>
+              <div class="ui disable button"><a>...</a></div>
+          <% } %>
+          
+          <% for(; i<(Number(current) + 4) && i < posts.pages; i++) { %> 
+              <% if(i == current) { %>
+                  <div class="ui active button"><a><%= i %></a></div>
+              <% } else {%>
+                  <div class="ui button"><a href="/content/all/<%= i %>"><%= i %></a></div>
+              <% } %>
+          <% } %>
+          
+          <% if(i == Number(current) + 4 && i< posts.pages) { %>
+              <div class="ui disabled button"><a>...</a></div>
+          <% } else { %>
+              <div class="ui button"><a href="/content/all/<%= posts.pages - 1 %>">Last</a></div>
+          <% } %>
+         </div>
+          
+          
+          
+          <!--<div class="ui basic buttons">-->
+          <!--    <div class="ui button">First</div>-->
+          <!--    <div class="ui button">1</div>-->
+          <!--    <div class="ui button">Last</div>-->
+          <!--  </div>-->
           
     <% } %>
 
