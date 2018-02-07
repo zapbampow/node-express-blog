@@ -1,50 +1,67 @@
 <% include ../partials/header %>
 
+<h1>All Articles</h1>
+
+<div class="ui divided items">
     <% posts.docs.forEach(function(post) { %>
-        <div class="ui segment">
-            <p>Title: <%= post.title %></p>
-        </div>
+        <div class="item">
+                <div class="image">
+                  <img src="<%= post.image %>">
+                </div>
+                <div class="content">
+                  <a class="header"><%= post.title %></a>
+                  <div class="extra">
+                    <span><%= moment(post.date).format('MMM DD, YYYY') %></span>
+                  </div>
+                  <div class="description">
+                      <% var shortContent = post.content.substring(0, 100); %>
+                    <p>
+                        <%= shortContent %>... <a href="/content/<%= post.id %>" class="mini basic green ui button">Read more</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
     <% }) %>
+    </div>
+    
+    <div class="ui hidden divider"></div>
     
     <% if(posts.pages > 1) { %>
-        <div class="ui basic buttons">
+        <div class="ui mini pagination menu">
           
           <!--First Button-->
           <% if(current == 1) { %>
-              <div class="ui button disabled"><a>First</a></div>
+              <a class="active item">First</a>
           <% } else { %>
-              <div class="ui button"><a href="/content/all/1">First</a></div>
+              <a href="/content/all/1" class="item">First</a>
           <% } %>
           
-          <!--Middle Buttons-->
-          <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+          <!--Rest of the buttons based on current page -->
+          <% var i = (current > 4 ? current - 3 : 1) %>
           
           <% if(i !== 1){ %>
-              <div class="ui disable button"><a>...</a></div>
+              <a href="/content/all/<%= i-1 %>" class="item">...</a>
           <% } %>
           
-          <% for(; i<(Number(current) + 4) && i < posts.pages; i++) { %> 
+          <% for(; i <= (current + 3) && i <= posts.pages; i++) { %> 
               <% if(i == current) { %>
-                  <div class="ui active button"><a><%= i %></a></div>
+                  <a class="active item"><%= i %></a>
               <% } else {%>
-                  <div class="ui button"><a href="/content/all/<%= i %>"><%= i %></a></div>
+                  <a href="/content/all/<%= i %>" class="item"><%= i %></a>
+              <% } %>
+              
+              <% if (i == (current + 3) && i < posts.pages) { %>
+                  <a href="/content/all/<%= i+1 %>" class="item">...</a>
               <% } %>
           <% } %>
           
-          <% if(i == Number(current) + 4 && i< posts.pages) { %>
-              <div class="ui disabled button"><a>...</a></div>
+          <% if(current == posts.pages) { %>
+              <a class="disabled item">Last</a>
           <% } else { %>
-              <div class="ui button"><a href="/content/all/<%= posts.pages - 1 %>">Last</a></div>
+              <a href="/content/all/<%= posts.pages - 1 %>" class="item">Last</a>
           <% } %>
          </div>
-          
-          
-          
-          <!--<div class="ui basic buttons">-->
-          <!--    <div class="ui button">First</div>-->
-          <!--    <div class="ui button">1</div>-->
-          <!--    <div class="ui button">Last</div>-->
-          <!--  </div>-->
+
           
     <% } %>
 

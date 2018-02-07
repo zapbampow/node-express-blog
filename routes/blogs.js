@@ -21,14 +21,13 @@ router.get('/', function(req, res){
 
 // ALL ARTICLES ROUTE
 router.get('/all/:page_num', function(req, res){
-  console.log(req.params.page_num);
-  Blog.paginate({}, {page:req.params.page_num, limit:5}, function(err, posts){
+  Blog.paginate({}, {sort: { date: -1 }, page:req.params.page_num, limit:10}, function(err, posts){
     if(err){
       req.flash('error', 'Something went wrong finding those articles. Please try again.');
       res.redirect('back');
     } else {
       console.log(posts)
-      res.render('content/all', {posts:posts, current:posts.page});
+      res.render('content/all', {posts:posts, current:Number(posts.page)});
     }
   })
 })
