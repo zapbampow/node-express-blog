@@ -123,18 +123,19 @@ router.delete('/:id', middleware.isAdmin, function(req, res){
 
 
 // AUTHOR INDEX ROUTE - Shows POSTS of single author
-router.get('/author/:author_name', function(req, res) {
+router.get('/author/:author_name/:page_num', function(req, res) {
     User.findOne({name:req.params.author_name}, function(err, foundAuthor){
       if(err){
         console.log(err)
         req.flash("error", "Hmm. That name doesn't seem to be one of our authors.")
       } else {
-        Blog.find({'author.id':foundAuthor.id}, function(err, blog){
+        Blog.paginate({'author.id':foundAuthor.id}, {sort: { date: -1 }, page:req.params.page_num, limit:2}, function(err, blog){
           if(err){
             console.log(err)
+            req.flash('error', "There was a problem adding the articles to the page or with the pagination.")
           } else {
             console.log(blog);
-            res.render('content/author', {author:foundAuthor, postId:foundAuthor.posts, blog:blog});
+            res.render('content/author', {author:foundAuthor, postId:foundAuthor.posts, blog:blog, current:Number(blog.page)});
           }
         })
       }

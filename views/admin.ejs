@@ -2,14 +2,14 @@
 
 <h1>Admin page</h1>
 
-<div class="ui icon green button"><i class="write icon"></i>Create New Post</div>
+<a class="ui icon green button" href="/content/new"><i class="write icon"></i>Create New Post</a>
 
 <div class="ui hidden divider"></div>
 
 <% if(currentUser.permission == 'admin') { %>
 
-<div class="ui icon button"><i class="user icon"></i>Create New User</div>
-<div class="ui icon button"><i class="user outline icon"></i><i class="text cursor icon"></i>  Edit User</div>
+<a class="ui icon button" href="/admin/user/new"><i class="user icon"></i>Create New User</a>
+<a class="ui icon button" href="/admin/user/all"><i class="user outline icon"></i><i class="text cursor icon"></i>  Edit User</a>
 
 <% } %>
 

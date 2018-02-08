@@ -4,8 +4,8 @@
 
 
 <div class="ui divided items">
-    <% if(blog.length > 0){ %>
-    <% blog.forEach(function(post){ %>
+    <% if(blog.docs.length > 0){ %>
+    <% blog.docs.forEach(function(post){ %>
             <div class="item">
                 <div class="image">
                   <img src="<%= post.image %>">
@@ -28,6 +28,45 @@
         <p class="ui small header">Sorry. No search results.</p>
     <% } %>
 </div>
+
+ <% if(blog.pages > 1) { %>
+        <div class="ui mini pagination menu">
+          
+          <!--First Button-->
+          <% if(current == 1) { %>
+              <a class="active item">First</a>
+          <% } else { %>
+              <a href="/search<%= baseSearch %>&page=1" class="item">First</a>
+          <% } %>
+          
+          <!--Rest of the buttons based on current page -->
+          <% var i = (current > 4 ? current - 3 : 1) %>
+          
+          <% if(i !== 1){ %>
+              <a href="/search<%= baseSearch %>&page=<%= i-1 %>" class="item">...</a>
+          <% } %>
+          
+          <% for(; i <= (current + 3) && i <= blog.pages; i++) { %> 
+              <% if(i == current) { %>
+                  <a class="active item"><%= i %></a>
+              <% } else {%>
+                  <a href="/search<%= baseSearch %>&page=<%= i %>" class="item"><%= i %></a>
+              <% } %>
+              
+              <% if (i == (current + 3) && i < blog.pages) { %>
+                  <a href="/search<%= baseSearch %>&page=<%= i+1 %>" class="item">...</a>
+              <% } %>
+          <% } %>
+          
+          <% if(current == blog.pages) { %>
+              <a class="disabled item">Last</a>
+          <% } else { %>
+              <a href="/search<%= baseSearch %>&page=<%= blog.pages %>" class="item">Last</a>
+          <% } %>
+         </div>
+
+          
+    <% } %>
     
 
 <% include partials/footer %>
