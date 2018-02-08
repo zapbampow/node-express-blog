@@ -16,6 +16,8 @@ author: {
 },
 content: String,
 image: String, 
+category: String,
+tags: [String],
 comments: [
         {
             type: mongoose.Schema.Types.ObjectId,

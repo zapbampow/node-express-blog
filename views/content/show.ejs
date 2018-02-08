@@ -7,7 +7,7 @@
 <p class="post-meta">
     <span class="post-meta-margin"><%= moment(blog.date).format('MMM DD, YYYY'); %></span>
     <span class="post-meta-margin">|</span>
-    <span>By <%= blog.author.name %></span>
+    <span>By <a href="/content/author/<%= blog.author.name %>"><%= blog.author.name %></a></span>
     
     
 </p>

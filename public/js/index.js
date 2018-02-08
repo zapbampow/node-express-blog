@@ -6,7 +6,6 @@ $(document).ready(function(){
         $('#comment-text').html("@" + replyValue);
     })
     
-
 })
 
     

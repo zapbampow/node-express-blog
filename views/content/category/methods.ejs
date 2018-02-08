@@ -1,10 +1,10 @@
-<% include ../partials/header %>
+<% include ../../partials/header %>
 
-<h1 class="ui header"><%= author.name %></h1>
+<h1>Methods</h1>
 
 <div class="ui divided items">
-        <% blog.docs.forEach(function(post) {    %> 
-              <div class="item">
+    <% blog.docs.forEach(function(post) { %>
+        <div class="item">
                 <div class="image">
                   <img src="<%= post.image %>">
                 </div>
@@ -22,49 +22,51 @@
                 </div>
               </div>
     <% }) %>
- </div>
- 
- <!-- Pagination -->
-  <% if(blog.pages > 1) { %>
+</div>
+
+ <div class="ui hidden divider"></div>
+    
+    <!-- Thanks to Mikhail Evdokimov for his pagination logic. It saved me a lot of work. Check it out here. https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html -->
+    
+    <% if(blog.pages > 1) { %>
         <div class="ui mini pagination menu">
           
           <!--First Button-->
           <% if(current == 1) { %>
               <a class="active item">First</a>
           <% } else { %>
-              <a href="/content/author/<%= author.name  %>/1" class="item">First</a>
+              <a href="/content/category/methods/1" class="item">First</a>
           <% } %>
           
           <!--Rest of the buttons based on current page -->
           <% var i = (current > 4 ? current - 3 : 1) %>
           
           <% if(i !== 1){ %>
-              <a href="/content/author/<%= author.name  %>/<%= i-1 %>" class="item">...</a>
+              <a href="/content/category/methods/<%= i-1 %>" class="item">...</a>
           <% } %>
           
           <% for(; i <= (current + 3) && i <= blog.pages; i++) { %> 
               <% if(i == current) { %>
                   <a class="active item"><%= i %></a>
               <% } else {%>
-                  <a href="/content/author/<%= author.name  %>/<%= i %>" class="item"><%= i %></a>
+                  <a href="/content/category/methods/<%= i %>" class="item"><%= i %></a>
               <% } %>
               
               <% if (i == (current + 3) && i < blog.pages) { %>
-                  <a href="/content/author/<%= author.name  %>/<%= i+1 %>" class="item">...</a>
+                  <a href="/content/category/methods/<%= i+1 %>" class="item">...</a>
               <% } %>
           <% } %>
           
           <% if(current == blog.pages) { %>
               <a class="disabled item">Last</a>
           <% } else { %>
-              <a href="/content/author/<%= author.name  %>/<%= blog.pages - 1 %>" class="item">Last</a>
+              <a href="/content/category/methods/<%= blog.pages - 1 %>" class="item">Last</a>
           <% } %>
          </div>
 
           
-    <% } %>
+    <% } %>    
 
 
 
-
-<% include ../partials/footer %>
+<% include ../../partials/footer %>

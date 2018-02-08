@@ -44,7 +44,8 @@ var indexRoutes = require('./routes/index'),
     blogRoutes = require('./routes/blogs'),
     commentRoutes = require('./routes/comments'),
     adminRoutes = require('./routes/admin'),
-    searchRoute = require('./routes/search');
+    searchRoute = require('./routes/search'),
+    categoryRoutes = require('./routes/category');
 
 // Passport Setup
 app.use(require('express-session')({
@@ -73,6 +74,7 @@ app.use("/content", blogRoutes);
 app.use('/content/:id/comments', commentRoutes);
 app.use('/admin', adminRoutes);
 app.use('/search', searchRoute);
+app.use('/content/category', categoryRoutes);
 
 
 

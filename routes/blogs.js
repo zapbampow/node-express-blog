@@ -19,6 +19,11 @@ router.get('/', function(req, res){
   })
 })
 
+// ALL ARTICLES REDIRECT ROUTE
+router.get('/all', function(req, res){
+  res.redirect('/content/all/1');
+})
+
 // ALL ARTICLES ROUTE
 router.get('/all/:page_num', function(req, res){
   Blog.paginate({}, {sort: { date: -1 }, page:req.params.page_num, limit:10}, function(err, posts){
@@ -41,8 +46,16 @@ router.get('/new', middleware.isLoggedIn, function(req, res){
 // CREATE ARTICLE ROUTE
 router.post('/', middleware.isLoggedIn, function(req, res){
   req.body.blog.body = req.sanitize(req.body.blog.body);
+  
 
-  var newPost = {title:req.body.blog.title, author:{id:req.user.id, name:req.user.name}, image: req.body.blog.image, content:req.body.blog.content}
+  var newPost = {
+    title:req.body.blog.title, 
+    author:{id:req.user.id, name:req.user.name}, 
+    image: req.body.blog.image, 
+    category: req.body.blog.category, 
+    tags:req.body.blog.tags.split(" "), 
+    content:req.body.blog.content
+  }
   
   Blog.create(newPost, function(err, blog){
     if(err){
