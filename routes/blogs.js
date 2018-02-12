@@ -143,12 +143,41 @@ router.delete('/:id', middleware.isAdmin, function(req, res){
   })
 })
 
+
+// AUTHOR ROUTES
+// Route for index of all authors
+router.get('/author/all', function(req, res) {
+    User.find({}, function(err, users){
+      if(err){
+        console.log(err);
+        req.flash('error', 'There was a problem doing that. Try again.');
+        res.redirect('back');
+      } else {
+        // Alphabetize the users
+        var authors = users.sort(function(a, b) {
+          var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+          var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+        
+          // names must be equal
+          return 0;
+        });
+        res.render('content/all-authors', {authors:authors});
+      }
+    })
+});
+
 router.get('/author/:author_name', function(req, res) {
     res.redirect('/content/author/' + req.params.author_name + '/1');
 })
 
 
-// AUTHOR INDEX ROUTE - Shows POSTS of single author
+// AUTHOR ARTICLE INDEX ROUTE - Shows POSTS of single author
 router.get('/author/:author_name/:page_num', function(req, res) {
     User.findOne({name:req.params.author_name}, function(err, foundAuthor){
       if(err){
@@ -172,6 +201,9 @@ router.get('/author/:author_name/:page_num', function(req, res) {
       }
     })
 })
+
+
+
 
 //===================
 

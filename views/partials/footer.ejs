@@ -34,7 +34,7 @@
             
             <div class="column">
                 <div class="ui list">
-                  <div class="item"><a href="#" class="item">Articles</a></div>
+                  <div class="item"><a href="/content/all" class="item">Articles</a></div>
                   <div class="item"><a href="#" class="item">Authors</a></div>
                   <div class="item"><a href="#" class="item">Resources</a></div>
                 </div>
@@ -42,8 +42,14 @@
             
             <div class="column">
                 <div class="ui list">
-                  <div class="item"><a href="/admin">Admin</a></div>
+                  
+                  <% if(currentUser) { %>
+                      <div class="item">Logged in as <%= currentUser.name %></div>
+                      <div class="item"><a href="/admin/logout">Logout</a></div>
+                  <% } else { %>
                   <div class="item"><a href="/admin/user/login">Login</a></div>
+                  <% } %>
+                  <div class="item"><a href="/admin">Admin</a></div>
                   <div class="item"><a href="/contribute">How to Contribute</a></div>
                   <div class="item">Sitemap</div>
                 </div>

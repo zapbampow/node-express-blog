@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+
+<h1>All our authors</h1>
+
+<div class="ui items">
+
+    <% authors.forEach(function(author) { %>
+        <% if(author.posts.length > 0) { %>
+        <div class="item">
+            <div class="content">
+                 <a href="/content/author/<%= author.name %>" class="header"><%= author.name %></a>
+                 
+            </div>
+        </div>
+        <% } %>
+    <% }) %>
+
+</div>
+
+<% include ../partials/footer %>
