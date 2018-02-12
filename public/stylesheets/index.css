@@ -99,3 +99,6 @@ form.delete-comment, form.edit-button {
   color: rgba(34,36,38,.3);
 }
 
+.ui.middle.aligned.divided.list .admin-user {
+  margin-bottom: 1em;
+}

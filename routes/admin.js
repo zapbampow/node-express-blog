@@ -2,7 +2,8 @@ var express = require('express'),
     router = express.Router(),
     User = require('../models/user'),
     passport = require('passport'),
-    middleware = require('../middleware');
+    middleware = require('../middleware'),
+    methodOverride =    require('method-override');
     
 
 // ADMIN INDEX ROUTE
@@ -28,6 +29,58 @@ router.post('/user', middleware.isAdmin, function(req, res){
           res.redirect("/admin")
       })
     }
+  })
+})
+
+// USER INDEX PAGE - a list of all users
+router.get('/user', middleware.isAdmin, function(req, res){
+  User.find({}, function(err, users){
+    if(err){
+      console.log(err)
+      req.flash('error', "Couldn't find users.")
+      res.redirect('back')
+    } else {
+      res.render('users', {users:users})
+    }
+  });
+});
+
+// USER EDIT PAGE
+router.get('/user/:user_id/edit', middleware.isAdmin, function(req, res){
+  User.findById(req.params.user_id, function(err, user){
+    if(err){
+      console.log(err)
+      req.flash('error', "We didn't find that user. Try again.")
+      res.redirect('back')
+    } else {
+      res.render('edit-user', {user:user});
+    }
+  })
+})
+
+router.put('/user/:user_id', middleware.isAdmin, function(req, res){
+  console.log(req.body)
+  
+  User.findByIdAndUpdate(req.params.user_id, req.body, function(err, user){
+    if(err){
+      console.log(err)
+      req.flash('error', "There was a problem updating this user. Please try again.")
+      res.redirect('back');
+    } else {
+      req.flash('success', "You have updated the user.")
+      res.redirect('/admin/user');
+    }
+  })
+})
+
+router.delete('/user/:user_id', function(req, res){
+  User.findByIdAndRemove(req.params.user_id, function(err){
+    if(err){
+      console.log(err)
+      req.flash('error', "There was a problem deleting that user");
+      res.redirect('back')
+    } 
+    res.redirect('/admin/user');
   })
 })
 

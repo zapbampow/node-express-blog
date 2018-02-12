@@ -155,6 +155,7 @@ router.get('/author/:author_name/:page_num', function(req, res) {
         console.log(err)
         req.flash("error", "Hmm. That name doesn't seem to be one of our authors.")
       } else {
+        if(foundAuthor){
         Blog.paginate({'author.id':foundAuthor.id}, {sort: { date: -1 }, page:req.params.page_num, limit:8}, function(err, blog){
           if(err){
             console.log(err)
@@ -164,6 +165,10 @@ router.get('/author/:author_name/:page_num', function(req, res) {
             res.render('content/author', {author:foundAuthor, postId:foundAuthor.posts, blog:blog, current:Number(blog.page)});
           }
         })
+      } else {
+        req.flash('error', "Hmm. That author doesn't appear to be in our system. Maybe they used to write for us, but don't anymore.");
+        res.redirect('back');
+      }
       }
     })
 })
