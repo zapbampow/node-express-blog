@@ -9,7 +9,7 @@ var express = require('express'),
 router.get ('/:thisCategory', function(req, res) {
     var page = 1;
     
-    Blog.paginate({"category":req.params.thisCategory}, {sort: { date: -1 }, page:page, limit:10}, function(err, blog) {
+    Blog.paginate({"category":req.params.thisCategory}, {sort: { date: -1 }, page:page, limit:8}, function(err, blog) {
         if(err){
             console.log(err);
             req.flash('error', "Hmm. There was a problem either finding that category or finding any articles under that category.")
