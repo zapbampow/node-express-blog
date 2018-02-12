@@ -15,7 +15,22 @@
  <div class="post-content">
     <img src="<%= blog.image %>" class="ui medium left floated fluid image">
     <p><%- blog.content %></p>     
- </div>   
+ </div>  
+ 
+ <div class="ui hidden divider"></div>
+ 
+ <div class="cat-tags">
+     <div class="category">Category: <a href="/content/category/<%= blog.category %>"><%= blog.category %></a>  </div>
+     <div class="tags">
+         Tags: <% for(i=0; i<blog.tags.length; i++) { %>
+                 <% if(i === blog.tags.length - 1) { %>
+                     <a href="/content/tags/<%= blog.tags[i] %>"><%= blog.tags[i] %></a>
+                 <% } else { %>
+                     <a href="/content/tags/<%= blog.tags[i] %>"><%= blog.tags[i] + ", "  %></a>
+                 <% } %>
+         <% } %>
+         </div>
+ </div>
  <div class="ui hidden divider"></div>
  <a href="#comment-box" class="ui mini inverted green button">Comment on this post</a>
  

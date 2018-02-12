@@ -83,5 +83,14 @@ form.delete-comment, form.edit-button {
 }
 
 .ui.list .list > .item a, .ui.list > .item a {
-  color: rgba(255,255,255,.9);;
+  color: rgba(255,255,255,.9);
+}
+
+.cat-tags{
+  color: rgba(34,36,38,.3);
+  
+}
+
+.cat-tags a {
+  color: rgba(34,36,38,.3);
 }
