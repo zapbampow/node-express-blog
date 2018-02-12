@@ -113,7 +113,16 @@ router.get('/:id/edit', middleware.checkPostOwnership, function(req, res){
 router.put('/:id', middleware.checkPostOwnership, function(req, res){
   req.body.blog.content = req.sanitize(req.body.blog.content);
 
-  Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, blog){
+  var updatedPost = {
+    title:req.body.blog.title, 
+    author:{id:req.user.id, name:req.user.name}, 
+    image: req.body.blog.image, 
+    category: req.body.blog.category, 
+    tags:req.body.blog.tags.split(" "), 
+    content:req.body.blog.content
+  };
+
+  Blog.findByIdAndUpdate(req.params.id, updatedPost, function(err, blog){
     if(err){
       console.log(err)
     } else {
