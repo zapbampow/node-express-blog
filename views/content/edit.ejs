@@ -6,11 +6,32 @@
                     <input name="blog[title]" value="<%= blog.title %>" type="text"></input>
                 </div>
                 <div class="field">
-                    <input name="blog[image]" type="text" value="<%= blog.image %>"></input>
-                </div>
-                <div class="field">
                     <textarea name="blog[content]" ><%= blog.content %></textarea>
                 </div>
+                <div class="field">
+                    <input name="blog[image]" type="text" value="<%= blog.image %>"></input>
+                </div>
+                
+                <div class="field">
+                      <div id="category" class="ui selection dropdown">
+                          <input name="blog[category]" type="hidden">
+                          <i class="dropdown icon"></i>
+                          <div class="default text">Category</div>
+                          <div  class="menu">
+                              <div class="item" data-value="general">General</div>
+                              <div class="item" data-value="methods">Methods</div>
+                              <div class="item" data-value="diy">DIY</div>
+                              <div class="item" data-value="logs">Logs</div>
+                          </div>
+                      </div>
+                </div>
+                
+                <% var blogTags= blog.tags.join(' '); %>
+                
+                <div class="field">
+                    <input name="blog[tags]" value="<%= blogTags %>" ></input>
+                </div>
+                
                 <button class="ui secondary button" type="submit">Submit</button>
             </form>
         
