@@ -9,13 +9,14 @@ var express = require('express'),
 router.get ('/:thisCategory', function(req, res) {
     var page = 1;
     
-    Blog.paginate({"category":req.params.thisCategory}, {sort: { date: -1 }, page:page, limit:8}, function(err, blog) {
+    Blog.paginate({"category":req.params.thisCategory}, {sort: { date: -1 }, page:page, limit:1}, function(err, blog) {
+        var category = req.params.thisCategory;
         if(err){
             console.log(err);
             req.flash('error', "Hmm. There was a problem either finding that category or finding any articles under that category.")
         } else {
             console.log(blog)
-            res.render('content/category/methods', {blog:blog, current:page})
+            res.render('content/category/category', {blog:blog, current:page})
         }
     })
 });
@@ -24,13 +25,13 @@ router.get ('/:thisCategory', function(req, res) {
 router.get('/:thisCategory/:page_num', function(req,res){
     var page = req.params.page_num;
     
-     Blog.paginate({"category":req.params.thisCategory}, {sort: { date: -1 }, page:page, limit:10}, function(err, blog) {
+     Blog.paginate({"category":req.params.thisCategory}, {sort: { date: -1 }, page:page, limit:1}, function(err, blog) {
         if(err){
             console.log(err);
             req.flash('error', "Hmm. There was a problem either finding that category or finding any articles under that category.")
         } else {
             console.log(blog)
-            res.render('content/category/methods', {blog:blog, current:Number(blog.page)})
+            res.render('content/category/category', {blog:blog, current:Number(blog.page)})
         }
     })
 })
