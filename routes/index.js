@@ -9,7 +9,7 @@ var express = require('express'),
 // ROOT ROUTE
 router.get('/', function(req, res) {
   console.log('Root route called.');
-  res.render('home');
+  res.redirect('/content');
 });
 
 
@@ -77,5 +77,7 @@ router.get('/contribute', function(req, res){
 router.get('/resources', function(req, res){
     res.render('content/resources')
 })
+
+
 //========================================
 module.exports = router;

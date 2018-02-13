@@ -40,13 +40,13 @@ var Blog = require('./models/blog'),
 
 
 // Routes
-var indexRoutes = require('./routes/index'),
-    blogRoutes = require('./routes/blogs'),
+var blogRoutes = require('./routes/blogs'),
     commentRoutes = require('./routes/comments'),
     adminRoutes = require('./routes/admin'),
     searchRoute = require('./routes/search'),
     categoryRoutes = require('./routes/category'), 
-    tagsRoutes = require('./routes/tags');
+    tagsRoutes = require('./routes/tags'),
+    indexRoutes = require('./routes/index');
 
 // Passport Setup
 app.use(require('express-session')({
@@ -79,6 +79,10 @@ app.use('/content/category', categoryRoutes);
 app.use('/content/tags', tagsRoutes);
 
 
+// 404 Handling
+app.use(function (req, res, next) {
+  res.status(404).render("nothing-here");
+})
 
 
 //

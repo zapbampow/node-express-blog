@@ -49,13 +49,13 @@
         <div class="sixteen wide mobile ten wide tablet eleven wide computer column">
           
           <!-- Flash Messages -->
-          <% if(error[0]){%> 
+          <% if(error.length > 0){%> 
           <div class="ui negative message" role="alert">
             <p><%= error %></p>
           </div>
           <% } %>
           
-          <% if(success[0]){%>
+          <% if(success.length > 0){%>
           <div class="ui positive message" role="alert">
             <p><%= success %></p>
           </div>
