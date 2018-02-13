@@ -75,5 +75,9 @@ router.get('/contribute', function(req, res){
     res.render('content/contribute');
 })
 
+// RESOURCES SHow PAGE
+router.get('/resources', function(req, res){
+    res.render('content/resources')
+})
 //========================================
 module.exports = router;

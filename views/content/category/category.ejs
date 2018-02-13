@@ -1,5 +1,6 @@
 <% include ../../partials/header %>
 <!-- Make Category Title's first letter uppercase -->
+<% if(blog.docs.length > 0){ %>
 <% var categoryTitle = blog.docs[0].category.charAt(0).toUpperCase() + blog.docs[0].category.slice(1) %>
 <h1><%= categoryTitle %></h1>
 
@@ -68,6 +69,8 @@
           
     <% } %>    
 
-
+<% } else { %>
+    <h1>Sorry. We didn't find and articles with that catgory</h1>
+<% } %>
 
 <% include ../../partials/footer %>
