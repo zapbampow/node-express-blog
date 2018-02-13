@@ -13,12 +13,12 @@ router.get('/', middleware.isLoggedIn, function(req, res){
 
 // NEW USER ROUTE
 // TODO: Add isAdmin middleware instead of isLoggedIn
-router.get('/user/new', /*middleware.isAdmin,*/  function(req, res){
+router.get('/user/new', middleware.isAdmin,  function(req, res){
   res.render('register')
 })
 
 // REGISTER NEW USER CREATE ROUTE
-router.post('/user', /*middleware.isAdmin,*/ function(req, res){
+router.post('/user', middleware.isAdmin, function(req, res){
   User.register(new User({name:req.body.name, username: req.body.username, email: req.body.email, permission: req.body.permission}), req.body.password, function(err, user){
     if(err) {
       console.log(err);
