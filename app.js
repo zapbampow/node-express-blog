@@ -27,9 +27,10 @@ app.use(expressSanitizer());
 app.use(flash());
 
 
-
+console.log("DATABASEURL is " + process.env.DATABASEURL);
 // Connect Mongoose
-mongoose.connect('process.env.DATABASEURL');
+mongoose.connect(process.env.DATABASEURL);
+// mongoose.connect('mongodb://localhost/nodeblog')
 mongoose.Promise = global.Promise;
 
 // Models
