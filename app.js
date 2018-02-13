@@ -29,7 +29,7 @@ app.use(flash());
 
 
 // Connect Mongoose
-mongoose.connect('mongodb://localhost/nodeblog');
+mongoose.connect('process.env.DATABASEURL');
 mongoose.Promise = global.Promise;
 
 // Models
