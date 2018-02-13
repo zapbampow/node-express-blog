@@ -55,11 +55,9 @@ router.post('/contact', function(req, res){
             req.flash("error", "Something went wrong. Please try again.")
             return res.redirect('back') 
         } 
-        console.log('Message sent: %s', info.messageId);
         // Preview only available when sending through an Ethereal account
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
         req.flash("success", "Your message was successfully sent. We'll get back to you as soon as we can.")
-        res.render('content/contact'); //Add flash message
+        res.render('content/index');
 
     });
 })
