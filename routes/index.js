@@ -57,7 +57,7 @@ router.post('/contact', function(req, res){
         } 
         // Preview only available when sending through an Ethereal account
         req.flash("success", "Your message was successfully sent. We'll get back to you as soon as we can.")
-        res.render('content');
+        res.redirect('/content');
 
     });
 })
