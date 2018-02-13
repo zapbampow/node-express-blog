@@ -22,7 +22,7 @@ router.get('/contact', function(req, res){
 // CONTACT FORM POST ROUTE
 // This route needs to be customized with your email smtp settings.
 router.post('/contact', function(req, res){
-  var output = '<p>You have a contact request from ***name of blog**</p><h3>Contact Details</h3><ul> <li>Name: ' + req.body.contact.name + '<li> <li>Email: ' + req.body.contact.email +'</li> <li>Phone: ' +  req.body.contact.phone + '</li></ul><h3>Subject: ' + req.body.contact.subject + '</h3><p>' + req.body.contact.message + '</p>';
+  var output = '<p>You have a contact request from Frugal Brewing</p><h3>Contact Details</h3><ul> <li>Name: ' + req.body.contact.name + '<li> <li>Email: ' + req.body.contact.email +'</li> <li>Phone: ' +  req.body.contact.phone + '</li></ul><h3>Subject: ' + req.body.contact.subject + '</h3><p>' + req.body.contact.message + '</p>';
 
     //NODEMAILER CODE
     // create reusable transporter object using the default SMTP transport
@@ -59,7 +59,7 @@ router.post('/contact', function(req, res){
         // Preview only available when sending through an Ethereal account
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
         req.flash("success", "Your message was successfully sent. We'll get back to you as soon as we can.")
-        res.render('contact'); //Add flash message
+        res.render('/content/contact'); //Add flash message
 
     });
 })
